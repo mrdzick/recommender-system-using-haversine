@@ -1,4 +1,4 @@
-# Waste Bank RecommendationSystem Using Haversine (Front End Side)
+# Waste Bank Recommendation System Using Haversine (Front End Side)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
