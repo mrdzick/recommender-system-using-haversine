@@ -14,10 +14,4 @@ export class DataRepository {
 
     return sellers
   }
-
-  static async createDistancePoints(distancePoints: DistancePoint[]) {
-    await prisma.nearestPoint.createMany({
-      data: distancePoints
-    })
-  }
 }
