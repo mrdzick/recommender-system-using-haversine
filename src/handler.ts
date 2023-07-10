@@ -44,3 +44,21 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
     })
   }
 }
+
+export async function getAllSellersHandler (req: Request, res: Response) {
+  try {
+    const sellers = await DataRepository.getAllSellers()
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Berhasil mendapatkan data rekomendasi seller!',
+      data: sellers
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
