@@ -51,8 +51,26 @@ export async function getAllSellersHandler (req: Request, res: Response) {
 
     res.status(200).json({
       status: 'success',
-      message: 'Berhasil mendapatkan data rekomendasi seller!',
+      message: 'Berhasil mendapatkan data waste bank!',
       data: sellers
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
+
+export async function getAllBuyersHandler (req: Request, res: Response) {
+  try {
+    const buyers = await DataRepository.getAllBuyers()
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Berhasil mendapatkan data buyer!',
+      data: buyers
     })
   } catch (error) {
     console.log(error)

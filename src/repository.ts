@@ -14,4 +14,10 @@ export class DataRepository {
 
     return sellers
   }
+
+  static async getAllBuyers () {
+    const buyers = await prisma.buyer.findMany()
+
+    return buyers
+  }
 }
