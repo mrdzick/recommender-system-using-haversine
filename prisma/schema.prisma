@@ -17,7 +17,6 @@ model Buyer {
   city          String
   latitude      Float
   longitude     Float
-  nearestPoints NearestPoint[]
 
   @@map("buyers")
 }
@@ -29,18 +28,6 @@ model Seller {
   city          String
   latitude      Float
   longitude     Float
-  nearestPoints NearestPoint[]
 
   @@map("sellers")
-}
-
-model NearestPoint {
-  id       Int    @id @default(autoincrement())
-  buyer    Buyer  @relation(fields: [buyerId], references: [id])
-  buyerId  String @map("buyer_id")
-  seller   Seller @relation(fields: [sellerId], references: [id])
-  sellerId String @map("seller_id")
-  distance Float
-
-  @@map("nearest_points")
 }
