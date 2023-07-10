@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/src/app.js",
     "build": "tsc -p tsconfig.json",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
