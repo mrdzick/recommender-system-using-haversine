@@ -4,16 +4,17 @@ import { Haversine } from './haversine'
 
 export async function getRecommenderSellerHandler (req: Request, res: Response) {
   try {
-    const { id, latbuyer, longbuyer } = req.query
+    const { latbuyer, longbuyer } = req.query
 
     const sellers = await DataRepository.getAllSellers()
 
     const haversine = new Haversine(6371)
 
-    const distancePopulator = sellers.map((seller) => {
+    const sellersWithDistance = sellers.map((seller) => {
       return {
-        buyerId: id as string,
         sellerId: seller.id,
+        latitude: seller.latitude,
+        longitude: seller.longitude,
         distance: haversine.calculateDistance({
           latitude: Number(latbuyer),
           longitude: Number(longbuyer)
@@ -24,12 +25,16 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
       }
     })
 
-    await DataRepository.createDistancePoints(distancePopulator)
+    const sortedSellers = sellersWithDistance.sort((sellerA, sellerB) => {
+      return sellerA.distance - sellerB.distance
+    })
+
+    const slicedSortedSellers = sortedSellers.slice(0, 11)
 
     res.status(200).json({
       status: 'success',
       message: 'Berhasil mendapatkan data rekomendasi seller!',
-      data: sellers
+      data: slicedSortedSellers
     })
   } catch (error) {
     console.log(error)
