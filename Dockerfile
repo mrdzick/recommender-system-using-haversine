@@ -10,7 +10,7 @@ ADD . .
 
 ENV DATABASE_URL=${DATABASE_URL}
 
-RUN npm ci --omit=dev
+RUN npm ci
 
 RUN npm run migrate
 
