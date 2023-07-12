@@ -30,7 +30,7 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
       return sellerA.distance - sellerB.distance
     })
 
-    const slicedSortedSellers = sortedSellers.slice(0, 11)
+    const slicedSortedSellers = sortedSellers.slice(0, 10)
 
     res.status(200).json({
       status: 'success',
