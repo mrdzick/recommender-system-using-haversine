@@ -13,6 +13,7 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
     const sellersWithDistance = sellers.map((seller) => {
       return {
         sellerId: seller.id,
+        companyName: seller.companyName,
         latitude: seller.latitude,
         longitude: seller.longitude,
         distance: haversine.calculateDistance({
