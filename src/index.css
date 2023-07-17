@@ -9,8 +9,8 @@
 }
 
 .custom-icon__marker {
-    margin-left: -24px;
-    margin-top: -24px;
+    margin-left: -5px;
+    margin-top: -5px;
 }
 
 .custom-polyline__label {
@@ -19,6 +19,6 @@
 }
 
 .custom-polyline__label span {
-    display: inline-block;
+    display: none;
     width: 300px;
 }
