@@ -35,6 +35,7 @@ export type RecommendedSellers = {
   longitude: number;
   distance: number;
   companyName: string;
+  city: string;
 };
 
 export const API = (() => ({
