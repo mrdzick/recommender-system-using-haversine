@@ -14,6 +14,7 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
       return {
         sellerId: seller.id,
         companyName: seller.companyName,
+        city: `${seller.city}, ${seller.province}`,
         latitude: seller.latitude,
         longitude: seller.longitude,
         distance: haversine.calculateDistance({

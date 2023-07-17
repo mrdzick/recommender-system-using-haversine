@@ -67,6 +67,7 @@ Response:
             {
               "sellerId": "seller-9abfc02d-b999-457e-9555",
               "companyName": "CV Company Name",
+              "city": "KOTA AMBON, MALUKU",
               "latitude": -3.6939,
               "longitude": 128.1813,
               "distance": 465.900106256
