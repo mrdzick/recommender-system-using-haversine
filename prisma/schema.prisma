@@ -11,23 +11,42 @@ datasource db {
 }
 
 model Buyer {
-  id            String         @id
-  companyName   String         @map("company_name")
-  province      String
-  city          String
-  latitude      Float
-  longitude     Float
+  id          String @id
+  companyName String @map("company_name")
+  province    String
+  city        String
+  latitude    Float
+  longitude   Float
 
   @@map("buyers")
 }
 
 model Seller {
-  id            String         @id
-  companyName   String         @map("company_name")
-  province      String
-  city          String
-  latitude      Float
-  longitude     Float
+  id               String           @id
+  companyName      String           @map("company_name")
+  province         String
+  city             String
+  latitude         Float
+  longitude        Float
+  wasteInventories WasteInventory[]
 
   @@map("sellers")
+}
+
+model Waste {
+  id               Int              @id @default(autoincrement())
+  name             String
+  wasteInventories WasteInventory[]
+
+  @@map("wastes")
+}
+
+model WasteInventory {
+  id       Int    @id @default(autoincrement())
+  seller   Seller @relation(fields: [sellerId], references: [id])
+  sellerId String @map("seller_id")
+  waste    Waste  @relation(fields: [wasteId], references: [id])
+  wasteId  Int    @map("waste_id")
+
+  @@map("waste_inventories")
 }
