@@ -82,3 +82,55 @@ export async function getAllBuyersHandler (req: Request, res: Response) {
     })
   }
 }
+
+export async function getAllWastesHandler (req: Request, res: Response) {
+  try {
+    const wastes = await DataRepository.getAllWastes()
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Berhasil mendapatkan data limbah!',
+      data: wastes
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
+
+export async function postWasteHandler (req: Request, res: Response) {
+  try {
+    await DataRepository.createWaste(req.body)
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Berhasil membuat data limbah!'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
+
+export async function deleteWasteHandler (req: Request, res: Response) {
+  try {
+    await DataRepository.deleteWasteById(Number(req.params.wasteId))
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Berhasil menghapus data limbah!'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}

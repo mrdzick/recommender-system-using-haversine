@@ -8,6 +8,10 @@ interface DistancePoint {
   distance: number
 }
 
+interface Waste {
+  name: string
+}
+
 export class DataRepository {
   static async getAllSellers() {
     const sellers = await prisma.seller.findMany()
@@ -19,5 +23,25 @@ export class DataRepository {
     const buyers = await prisma.buyer.findMany()
 
     return buyers
+  }
+
+  static async getAllWastes () {
+    const wastes = await prisma.waste.findMany()
+
+    return wastes
+  }
+
+  static async createWaste (waste: Waste) {
+    await prisma.waste.create({
+      data: waste
+    })
+  }
+
+  static async deleteWasteById (wasteId: number) {
+    await prisma.waste.delete({
+      where: {
+        id: wasteId
+      }
+    })
   }
 }
