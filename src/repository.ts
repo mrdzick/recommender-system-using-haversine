@@ -13,10 +13,40 @@ interface Waste {
 }
 
 export class DataRepository {
-  static async getAllSellers() {
+  static async getAllSellers () {
     const sellers = await prisma.seller.findMany()
 
     return sellers
+  }
+
+  static async getDetailSellerById (sellerId: string) {
+    const seller = await prisma.seller.findFirst({
+      where: {
+        id: sellerId
+      },
+      include: {
+        wasteInventories: {
+          include: {
+            waste: true
+          }
+        }
+      }
+    })
+
+    return {
+      id: seller?.id,
+      companyName: seller?.companyName,
+      province: seller?.province,
+      city: seller?.city,
+      latitude: seller?.latitude,
+      longitude: seller?.longitude,
+      wasteInventories: seller?.wasteInventories.map((wasteInventory) => {
+        return {
+          id: wasteInventory.waste.id,
+          name: wasteInventory.waste.name
+        }
+      })
+    }
   }
 
   static async getAllBuyers () {
@@ -43,5 +73,34 @@ export class DataRepository {
         id: wasteId
       }
     })
+  }
+
+  static async createWasteInventory (sellerId: string, wasteId: number) {
+    await prisma.wasteInventory.create({
+      data: {
+        sellerId,
+        wasteId
+      }
+    })
+  }
+
+  static async deleteWasteInventory (sellerId: string, wasteId: number) {
+    await prisma.wasteInventory.deleteMany({
+      where: {
+        sellerId,
+        wasteId
+      }
+    })
+  }
+
+  static async checkWasteInventorySeller (sellerId: string, wasteId: number) {
+    const wasteInventory = await prisma.wasteInventory.findFirst({
+      where: {
+        sellerId,
+        wasteId
+      }
+    })
+
+    return wasteInventory
   }
 }

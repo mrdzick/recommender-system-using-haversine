@@ -2,10 +2,13 @@ import express from 'express'
 import {
   getRecommenderSellerHandler,
   getAllSellersHandler,
+  getDetailSellerHandler,
   getAllBuyersHandler,
   getAllWastesHandler,
   postWasteHandler,
-  deleteWasteHandler
+  deleteWasteHandler,
+  postWasteInventoryHandler,
+  deleteWasteInventorySellerHandler
 } from './handler'
 import cors from 'cors'
 
@@ -20,10 +23,13 @@ app.use(express.json())
 
 app.get('/recommender-seller', getRecommenderSellerHandler)
 app.get('/sellers', getAllSellersHandler)
+app.get('/sellers/:sellerId', getDetailSellerHandler)
 app.get('/buyers', getAllBuyersHandler)
 app.get('/wastes', getAllWastesHandler)
 app.post('/wastes', postWasteHandler)
 app.delete('/wastes/:wasteId', deleteWasteHandler)
+app.post('/waste-inventories', postWasteInventoryHandler)
+app.delete('/sellers/:sellerId/waste-inventories/:wasteId', deleteWasteInventorySellerHandler)
 
 const PORT = process.env.PORT || 5000
 

@@ -134,3 +134,69 @@ export async function deleteWasteHandler (req: Request, res: Response) {
     })
   }
 }
+
+export async function getDetailSellerHandler (req: Request, res: Response) {
+  try {
+    const seller = await DataRepository.getDetailSellerById(req.params.sellerId)
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Berhasil mendapatkan data detail seller!',
+      data: seller
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
+
+export async function postWasteInventoryHandler (req: Request, res: Response) {
+  try {
+    const { sellerId, wasteId } = req.body
+
+    const wasteInventory = await DataRepository.checkWasteInventorySeller(sellerId, wasteId)
+
+    if (wasteInventory) {
+      res.status(409).json({
+        status: 'fail',
+        message: 'Data inventory limbah sudah pernah dibuat!'
+      })
+
+      return
+    }
+
+    await DataRepository.createWasteInventory(sellerId, wasteId)
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Berhasil membuat data inventory limbah!'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
+
+export async function deleteWasteInventorySellerHandler (req: Request, res: Response) {
+  try {
+    const { sellerId, wasteId } = req.params
+    await DataRepository.deleteWasteInventory(sellerId, Number(wasteId))
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Berhasil menghapus data inventory limbah!'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Terjadi kegagalan pada server kami!'
+    })
+  }
+}
