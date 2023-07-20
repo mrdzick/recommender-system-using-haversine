@@ -4,9 +4,11 @@ import { Haversine } from './haversine'
 
 export async function getRecommenderSellerHandler (req: Request, res: Response) {
   try {
-    const { latbuyer, longbuyer } = req.query
+    const { latbuyer, longbuyer, wasteId } = req.query
 
-    const sellers = await DataRepository.getAllSellers()
+    const sellers = await DataRepository.getAllSellers({
+      wasteId: Number(wasteId)
+    })
 
     const haversine = new Haversine(6371)
 
@@ -49,7 +51,7 @@ export async function getRecommenderSellerHandler (req: Request, res: Response) 
 
 export async function getAllSellersHandler (req: Request, res: Response) {
   try {
-    const sellers = await DataRepository.getAllSellers()
+    const sellers = await DataRepository.getAllSellers({})
 
     res.status(200).json({
       status: 'success',

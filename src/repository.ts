@@ -13,7 +13,23 @@ interface Waste {
 }
 
 export class DataRepository {
-  static async getAllSellers () {
+  static async getAllSellers ({
+    wasteId
+  }: { wasteId?: number }) {
+    if (wasteId) {
+      const sellers = await prisma.seller.findMany({
+        where: {
+          wasteInventories: {
+            some: {
+              wasteId
+            }
+          }
+        }
+      })
+
+      return sellers
+    }
+
     const sellers = await prisma.seller.findMany()
 
     return sellers

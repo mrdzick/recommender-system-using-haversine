@@ -78,8 +78,8 @@ Notes: Fill the `$PORT` that you've been set on .env file or just fill it with 5
         ]
       }
 
-- `http://localhost:$PORT/recommender-sellers?latbuyer=$LATITUDE_BUYER&longbuyer=$LONGITUDE_BUYER`: Get all recommended sellers (waste bank) that sorted from closest to the most far distance from buyer.
-Fill `$LATITUDE_BUYER` with the value of buyer's latitude and fill `$LONGITUDE_BUYER` with the value of buyer's longitude.
+- `http://localhost:$PORT/recommender-sellers?latbuyer=$LATITUDE_BUYER&longbuyer=$LONGITUDE_BUYER&wasteId=$WASTE_ID`: Get all recommended sellers (waste bank) that sorted from closest to the most far distance from buyer.
+Fill `$LATITUDE_BUYER` with the value of buyer's latitude and fill `$LONGITUDE_BUYER` with the value of buyer's longitude. You can also get the only sellers which has specific waste by fill $WASTE_ID with id of selected waste. This $WASTE_ID is optional. If you omit $WASTE_ID, api will returning all sellers by default.
 
   Response:
 
