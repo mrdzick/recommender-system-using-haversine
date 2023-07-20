@@ -155,7 +155,9 @@ export async function getDetailSellerHandler (req: Request, res: Response) {
 
 export async function postWasteInventoryHandler (req: Request, res: Response) {
   try {
-    const { sellerId, wasteId } = req.body
+    const { sellerId } = req.params
+
+    const { wasteId } = req.body
 
     const wasteInventory = await DataRepository.checkWasteInventorySeller(sellerId, wasteId)
 

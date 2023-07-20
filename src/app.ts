@@ -28,7 +28,7 @@ app.get('/buyers', getAllBuyersHandler)
 app.get('/wastes', getAllWastesHandler)
 app.post('/wastes', postWasteHandler)
 app.delete('/wastes/:wasteId', deleteWasteHandler)
-app.post('/waste-inventories', postWasteInventoryHandler)
+app.post('/sellers/:sellerId/waste-inventories', postWasteInventoryHandler)
 app.delete('/sellers/:sellerId/waste-inventories/:wasteId', deleteWasteInventorySellerHandler)
 
 const PORT = process.env.PORT || 5000
