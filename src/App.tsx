@@ -1,12 +1,13 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import 'leaflet/dist/leaflet.css'
-import { API, Buyers, RecommendedSellers, Sellers } from "./services/api.ts";
+import { API, Buyers, RecommendedSellers, Sellers, Wastes } from "./services/api.ts";
 import ParentMap from "./components/ParentMap.tsx";
 import ListRecommendedSellers from "./components/ListRecommendedSellers.tsx";
 
 function App() {
   const [sellers, setSellers] = useState<Sellers[] | null>(null);
   const [buyers, setBuyers] = useState<Buyers[] | null>(null);
+  const [wastes, setWastes] = useState<Wastes[] | null>(null);
   const [recommendedSellers, setRecommendedSellers] = useState<RecommendedSellers[] | null>(null);
   const [positionBuyer, setPositionBuyer] = useState<[number, number]>([0, 0]);
   const [centerPositionPolyline, setCenterPositionPolyline] = useState<number[][]>([]);
@@ -33,17 +34,22 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const [sellers, buyers] = await Promise.all(
-        [API.GET_SELLERS(), API.GET_BUYERS()]
+      const [sellers, buyers, wastes] = await Promise.all(
+        [API.GET_SELLERS(), API.GET_BUYERS(), API.GET_WASTES()]
       );
 
       if (sellers && buyers) {
         setSellers(sellers?.data);
         setBuyers(buyers?.data);
       }
-    })();
-  }, []);
 
+      if (wastes) {
+        setWastes(wastes?.data);
+      }
+    })();
+
+
+  }, []);
 
   return (
     <section className="flex">
@@ -58,7 +64,20 @@ function App() {
       />
       <ListRecommendedSellers
         recommendedSellers={recommendedSellers || []}
+        wastes={wastes || []}
         isLoading={isLoading}
+        fallbackResult={async (wasteId) => {
+          const dataRecommendedSellers = await API.GET_RECOMMENDED_SELLERS(positionBuyer[0], positionBuyer[1], wasteId.toString());
+
+          if (dataRecommendedSellers) {
+            const middlePointLatitudeAndLongitude = dataRecommendedSellers?.data?.map((item) => {
+              return [((item.latitude + positionBuyer[0]) / 2), ((item.longitude + positionBuyer[1]) / 2)];
+            });
+      
+            setRecommendedSellers(dataRecommendedSellers?.data);
+            setCenterPositionPolyline(middlePointLatitudeAndLongitude);
+          }
+        }}
       />
     </section>
   )

@@ -1,15 +1,22 @@
 import { Spinner } from '@material-tailwind/react';
-import { RecommendedSellers } from "../services/api.ts";
+import { RecommendedSellers, Wastes } from "../services/api.ts";
 import { generateAvatar } from "../services/avatarGenerator.ts";
+import SelectWasteMenu from './SelectWaste.tsx';
 
 type ListRecommendedSellersProps = {
+  wastes: Wastes[];
   recommendedSellers: RecommendedSellers[];
   isLoading: boolean;
+  fallbackResult: (wasteId: string) => void;
 }
 
-const ListRecommendedSellers = ({ recommendedSellers, isLoading }: ListRecommendedSellersProps) => {
+const ListRecommendedSellers = ({ recommendedSellers, wastes, isLoading, fallbackResult }: ListRecommendedSellersProps) => {
   return (
     <section className="w-[30vw] h-screen overflow-y-auto">
+      <SelectWasteMenu 
+      wastes={wastes}
+      fallbackSelectWaste={fallbackResult}
+      />
       <div className="pl-1">
         <ul role="list" className="divide-y w-full max-auto px-2 divide-gray-100">
         {recommendedSellers && !isLoading && recommendedSellers.map((seller, idx) => (

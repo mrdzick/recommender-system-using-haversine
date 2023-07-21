@@ -37,6 +37,10 @@ export type RecommendedSellers = {
   companyName: string;
   city: string;
 };
+export type Wastes = {
+  id: number;
+  name: string;
+}
 
 export const API = (() => ({
   GET_SELLERS: async () => {
@@ -57,13 +61,22 @@ export const API = (() => ({
       CATCH_ERROR(error as Error);
     }
   },
-  GET_RECOMMENDED_SELLERS: async (latBuyer: number, longBuyer: number) => {
+  GET_RECOMMENDED_SELLERS: async (latBuyer: number, longBuyer: number, wasteId?: string) => {
     try {
-      const data = await BASE_GET_API(API_ENDPOINT.GET_RECOMMENDED_SELLERS(latBuyer, longBuyer));
+      const data = await BASE_GET_API(API_ENDPOINT.GET_RECOMMENDED_SELLERS(latBuyer, longBuyer, wasteId));
 
       return data as ResponseAPI<RecommendedSellers>;
     } catch (error) {
       CATCH_ERROR(error as Error);
     }
   },
+  GET_WASTES: async () => {
+    try {
+      const data = await BASE_GET_API(API_ENDPOINT.GET_WASTES);
+
+      return data as ResponseAPI<Wastes>
+    } catch (error) {
+      CATCH_ERROR(error as Error);
+    }
+  }
 }))();

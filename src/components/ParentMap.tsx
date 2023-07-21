@@ -1,6 +1,6 @@
-import {TileLayer, MapContainer } from "react-leaflet";
-import  { LatLngExpression } from "leaflet";
-import {Buyers, RecommendedSellers, Sellers} from "../services/api.ts";
+import { TileLayer, MapContainer } from "react-leaflet";
+import { LatLngExpression } from "leaflet";
+import { Buyers, RecommendedSellers, Sellers } from "../services/api.ts";
 import ListMarkerMap from "./ListMarkerMap.tsx";
 import ListPolylineMap from "./ListPolylineMap.tsx";
 
@@ -21,7 +21,7 @@ const ParentMap = ({
   centerPositionOfMap,
   fallbackMarkerClick,
   positionTargetBuyer,
- centerPositionPolyline
+  centerPositionPolyline
 }: ParentMapProps) => {
 
   return (
@@ -71,6 +71,7 @@ const ParentMap = ({
           />
         )}
       </MapContainer>
+      
     </div>
   );
 };
