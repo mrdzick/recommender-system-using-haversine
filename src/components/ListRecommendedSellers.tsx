@@ -8,14 +8,16 @@ type ListRecommendedSellersProps = {
   recommendedSellers: RecommendedSellers[];
   isLoading: boolean;
   fallbackResult: (wasteId: string) => void;
+  selectedWasteFilter: string;
 }
 
-const ListRecommendedSellers = ({ recommendedSellers, wastes, isLoading, fallbackResult }: ListRecommendedSellersProps) => {
+const ListRecommendedSellers = ({ recommendedSellers, wastes, isLoading, fallbackResult, selectedWasteFilter }: ListRecommendedSellersProps) => {
   return (
     <section className="w-[30vw] h-screen overflow-y-auto">
-      <SelectWasteMenu 
+      <SelectWasteMenu
       wastes={wastes}
       fallbackSelectWaste={fallbackResult}
+      selectedWasteFilter={selectedWasteFilter}
       />
       <div className="pl-1">
         <ul role="list" className="divide-y w-full max-auto px-2 divide-gray-100">

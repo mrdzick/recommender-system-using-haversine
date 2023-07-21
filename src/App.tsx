@@ -13,10 +13,12 @@ function App() {
   const [centerPositionPolyline, setCenterPositionPolyline] = useState<number[][]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedWasteFilter, setSelectedWasteFilter] = useState<string>('');
 
   const onGetRecommendedSellers = async (latBuyer: number, longBuyer: number) => {
     setIsLoading(true);
     setPositionBuyer([latBuyer, longBuyer]);
+    setSelectedWasteFilter('');
 
     const dataRecommendedSellers = await API.GET_RECOMMENDED_SELLERS(latBuyer, longBuyer);
 
@@ -66,14 +68,16 @@ function App() {
         recommendedSellers={recommendedSellers || []}
         wastes={wastes || []}
         isLoading={isLoading}
+        selectedWasteFilter={selectedWasteFilter}
         fallbackResult={async (wasteId) => {
+          setSelectedWasteFilter(wasteId);
           const dataRecommendedSellers = await API.GET_RECOMMENDED_SELLERS(positionBuyer[0], positionBuyer[1], wasteId.toString());
 
           if (dataRecommendedSellers) {
             const middlePointLatitudeAndLongitude = dataRecommendedSellers?.data?.map((item) => {
               return [((item.latitude + positionBuyer[0]) / 2), ((item.longitude + positionBuyer[1]) / 2)];
             });
-      
+
             setRecommendedSellers(dataRecommendedSellers?.data);
             setCenterPositionPolyline(middlePointLatitudeAndLongitude);
           }
