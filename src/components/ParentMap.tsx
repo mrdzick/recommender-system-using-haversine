@@ -3,6 +3,7 @@ import { LatLngExpression } from "leaflet";
 import { Buyers, RecommendedSellers, Sellers } from "../services/api.ts";
 import ListMarkerMap from "./ListMarkerMap.tsx";
 import ListPolylineMap from "./ListPolylineMap.tsx";
+import Legend from "./Legend.tsx";
 
 type ParentMapProps = {
   sellers: Sellers[] | null;
@@ -70,8 +71,9 @@ const ParentMap = ({
             positionTargetBuyer={positionTargetBuyer}
           />
         )}
+
+        <Legend />
       </MapContainer>
-      
     </div>
   );
 };
