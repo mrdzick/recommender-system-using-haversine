@@ -31,7 +31,7 @@ const Legend = () => {
             </div>
             <div class="flex gap-2 items-center">
               <div>
-              <svg xmlns="http://www.w3.org/2000/svg" id="SVGRepo_iconCarrier"> <path d="M2 9.75C2 9.33579 2.33579 9 2.75 9H17.25C17.6642 9 18 9.33579 18 9.75C18 10.1642 17.6642 10.5 17.25 10.5H2.75C2.33579 10.5 2 10.1642 2 9.75Z" fill="#138b27"/> </svg>             
+              <svg width="25px" height="25px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" id="SVGRepo_iconCarrier"> <path d="M2 9.75C2 9.33579 2.33579 9 2.75 9H17.25C17.6642 9 18 9.33579 18 9.75C18 10.1642 17.6642 10.5 17.25 10.5H2.75C2.33579 10.5 2 10.1642 2 9.75Z" fill="#138b27"/> </svg>             
               </div>
               <span class="font-bold">Pilihan Pengepul Terdekat</span>
             </div>
