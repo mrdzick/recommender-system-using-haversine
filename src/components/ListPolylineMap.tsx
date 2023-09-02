@@ -15,7 +15,7 @@ const ListPolylineMap = ({ dataPolyline, positionTargetBuyer, centerPositionPoly
       <Fragment key={polyLine.sellerId + index}>
         <Polyline
           positions={[[polyLine.latitude, polyLine.longitude], positionTargetBuyer]}
-          color="red"
+          color="green"
         />
         <Marker
           position={centerPositionPolyline[index] as LatLngExpression}
