@@ -79,6 +79,7 @@ function App() {
               return [((item.latitude + positionBuyer[0]) / 2), ((item.longitude + positionBuyer[1]) / 2)];
             });
 
+            setSellers(dataRecommendedSellers?.data);
             setRecommendedSellers(dataRecommendedSellers?.data);
             setCenterPositionPolyline(middlePointLatitudeAndLongitude);
           }
