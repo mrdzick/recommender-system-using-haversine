@@ -5,7 +5,7 @@ import ParentMap from "./components/ParentMap.tsx";
 import ListRecommendedSellers from "./components/ListRecommendedSellers.tsx";
 
 function App() {
-  const [sellers, setSellers] = useState<Sellers[] | null>(null);
+  const [sellers, setSellers] = useState<Sellers[] | null | RecommendedSellers[]>(null);
   const [buyers, setBuyers] = useState<Buyers[] | null>(null);
   const [wastes, setWastes] = useState<Wastes[] | null>(null);
   const [recommendedSellers, setRecommendedSellers] = useState<RecommendedSellers[] | null>(null);
@@ -27,6 +27,7 @@ function App() {
         return [((item.latitude + latBuyer) / 2), ((item.longitude + longBuyer) / 2)];
       });
 
+      setSellers(dataRecommendedSellers?.data);
       setRecommendedSellers(dataRecommendedSellers?.data);
       setCenterPositionPolyline(middlePointLatitudeAndLongitude);
     }

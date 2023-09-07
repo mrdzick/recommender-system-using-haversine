@@ -1,18 +1,18 @@
 import L from "leaflet";
 import {Marker, Popup} from "react-leaflet";
-import {Users} from "../services/api.ts";
+import {RecommendedSellers, Sellers} from "../services/api.ts";
 
-type ListMarkerMapProps<U> = {
-  dataMarker: U[];
+type ListMarkerMapProps = {
+  dataMarker: Sellers[] | RecommendedSellers[];
   typeMarker: 'buyer' | 'seller';
   fallbackEventClick?: (lat: number, long: number) => void;
   iconMarker: string;
 }
 
-const ListMarkerMap = <T extends Users,>({ dataMarker, typeMarker, iconMarker, fallbackEventClick }: ListMarkerMapProps<T>) => {
+const ListMarkerMap = ({ dataMarker, typeMarker, iconMarker, fallbackEventClick }: ListMarkerMapProps) => {
   return dataMarker.map((item ) => {
     return (
-      <Marker key={item.id} position={[item.latitude, item.longitude]}
+      <Marker key={item?.id || item.sellerId} position={[item.latitude, item.longitude]}
         icon={L.divIcon({
           className: 'custom-icon-marker',
           html: iconMarker,

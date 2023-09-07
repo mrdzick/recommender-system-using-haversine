@@ -16,6 +16,7 @@ export type Users = {
   city: string;
   companyName: string;
   id: string;
+  [key: string]: string | number;
   latitude: number;
   longitude: number;
   province: string;
@@ -36,6 +37,7 @@ export type RecommendedSellers = {
   distance: number;
   companyName: string;
   city: string;
+  [key: string]: string | number;
 };
 export type Wastes = {
   id: number;
